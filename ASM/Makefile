@@ -3,17 +3,8 @@
 #‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
 
 # Name
-NAME_1	= ./Colleen
-PROJECT_NAME_1 = Colleen
-SOURCE_1 = Colleen.c
-
-NAME_2 = ./Grace
-PROJECT_NAME_2 = Grace
-SOURCE_2 = Grace.c
-
-NAME_3 = ./Sully
-PROJECT_NAME_3 = Sully
-SOURCE_3 = Sully.c
+NAME	= ./Colleen
+PROJECT_NAME = Colleen
 
 #______________________________________________________________________________#
 ############################### Compiler #######################################
@@ -90,9 +81,7 @@ PATH_SRCS_UTILS = $(SRCS_DIR)/99_utils
 ############################### Sources ########################################
 #‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
 
-SRCS_1 += Colleen.c
-SRCS_2 += Grace.c
-SRCS_3 += Sully.c
+SRCS += Colleen.c
 
 vpath %c 
 
@@ -133,30 +122,14 @@ endef
 #‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
 
 #_____Build_____#
-all: $(NAME_1) $(NAME_2) $(NAME_3)
+all: $(NAME)
 	@echo "--▶ $(BGREEN)all\t$(GREEN)done$(NC)"
 	@echo "--------------------------------------------------"
 
-$(NAME_1): $(OBJS)
-	@$(CC) $(CFLAGS) $(SRCS_1) -o $(NAME_1)
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $^ -o $@
     #-----Output-----#
-	@echo "$(WHITE)\n▶$(BGREEN)$(NAME_1)\t$(GREEN)Executable created$(NC)"
-
-$(NAME_2): $(OBJS)
-	@$(CC) $(CFLAGS) $(SRCS_2) -o $(NAME_2)
-	@echo "$(WHITE)\n▶$(BGREEN)$(NAME_2)\t$(GREEN)Executable created$(NC)"
-
-$(NAME_3): $(OBJS)
-	@$(CC) $(CFLAGS) $(SRCS_3) -o $(NAME_3)
-	@echo "$(WHITE)\n▶$(BGREEN)$(NAME_3)\t$(GREEN)Executable created$(NC)"
-
-essai : all
-	@echo "▶ $(BWHITE)Test $(WHITE)$(PROJECT_NAME_1)$(NC)"
-	@./test.sh $(NAME_1)
-	@echo "▶ $(BWHITE)Test $(WHITE)$(PROJECT_NAME_2)$(NC)"
-	@./test.sh $(NAME_2)
-	@echo "▶ $(BWHITE)Test $(WHITE)$(PROJECT_NAME_3)$(NC)"
-	@./test.sh $(NAME_3)
+	@echo "$(WHITE)\n▶$(BGREEN)$(NAME)\t$(GREEN)Executable created$(NC)"
 
 $(OBJS): $(OBJS_DIR)/%.o: %.c | dir where
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -169,28 +142,29 @@ dir: $(OBJS_DIR)
 $(OBJS_DIR):
 	@mkdir $@
 
+test : all
+	@./$(NAME) > tmp
+	@diff tmp Colleen.c
+
 #_____Clean_____#
 clean: where_c
 	@rm -rf $(OBJS_DIR)
-	@rm -f tmp_*
     #-----Output-----#
 	@echo "▶ $(BYELLOW)clean $(YELLOW)Object files removed from $(PROJECT_NAME)$(NC)"
 	@echo "--▶ $(BYELLOW)clean$(YELLOW) done$(NC)"
 
 fclean: clean
-	@rm -f $(NAME_1)
-	@rm -f $(NAME_2)
-	@rm -f $(NAME_3)
+	@rm -f $(NAME)
     #-----Output-----#
-	@echo "\t$(RED)$(NAME_1) removed$(NC)"
+	@echo "\t$(RED)$(NAME) removed$(NC)"
 	@echo "--▶ $(BRED)fclean$(RED) done$(NC)"
 
 # Current Make
 where_c:
-	@echo "$(BBLACK)>$(PROJECT_NAME_1)$(NC)"
+	@echo "$(BBLACK)>$(PROJECT_NAME)$(NC)"
 
 where:
-	@echo "$(BBLACK)>$(PROJECT_NAME_1)$(NC)"
+	@echo "$(BBLACK)>$(PROJECT_NAME)$(NC)"
 
 re: fclean all
 
