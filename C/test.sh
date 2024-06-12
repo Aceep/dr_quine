@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$1" = "./Colleen" ]; then
+if [ "$1" = "Colleen" ]; then
     ./Colleen > tmp_Colleen
     diff tmp_Colleen Colleen.c > tmp_Diff
     if [ -s tmp_Diff ] && [ -e tmp_Diff ]
@@ -11,10 +11,10 @@ if [ "$1" = "./Colleen" ]; then
     fi
 fi
 
-if [ "$1" = "./Grace" ]; then
-    ./Grace > tmp_Grace
-    diff Grace.c tmp_Grace > tmp_Diff
-    if [ -s tmp_Diff ] && [ -e tmp_Diff ]
+if [ "$1" = "Grace" ]; then
+    ./Grace
+    diff Grace.c Grace_kid.c > tmp_Grace
+    if [ -s tmp_Grace ] && [ -e tmp_Grace ]
     then
         echo "KO"
     else
@@ -22,10 +22,10 @@ if [ "$1" = "./Grace" ]; then
     fi
 fi
 
-if [ "$1" = "./Sully" ]; then
+if [ "$1" = "Sully" ]; then
     ./Sully > tmp_Sully
-    diff Sully.c tmp_Sully > tmp_Diff
-    if [ -s tmp_Diff ] && [ -e tmp_Diff ]
+    diff Sully.c tmp_Sully > tmp_Diff2
+    if [ -s tmp_Diff ] && [ -e tmp_Diff2 ]
     then
         echo "KO"
     else

@@ -1,196 +1,35 @@
-#______________________________________________________________________________#
-############################### Target Names ###################################
-#‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
+SRC_C = Colleen.c
+SRC_G = Grace.c
+SRC_S = Sully.c
 
-# Name
-NAME_1	= ./Colleen
-PROJECT_NAME_1 = Colleen
-SOURCE_1 = Colleen.c
+OBJ_C = $(SRC_C:.c=.o)
+OBJ_G = $(SRC_G:.c=.o)
+OBJ_S = $(SRC_S:.c=.o)
 
-NAME_2 = ./Grace
-PROJECT_NAME_2 = Grace
-SOURCE_2 = Grace.c
+CFLAGS= -Wall -Werror -Wextra
 
-NAME_3 = ./Sully
-PROJECT_NAME_3 = Sully
-SOURCE_3 = Sully.c
-
-#______________________________________________________________________________#
-############################### Compiler #######################################
-#‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
-
-# Compiler
-CC = clang 
-
-# Compiler Flags
-CFLAGS = -Wall -Wextra -Werror
-
-ifeq ($(debug), 1)
-	CFLAGS += -g
-endif
-
-
-#______________________________________________________________________________#
-############################### Print Variables ################################
-#‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
-
-# Reset
-NC = \033[0m
-
-# Colors
-YELLOW = \033[0;33m
-GREEN = \033[0;32m
-BLUE = \033[0;34m
-RED = \033[0;31m
-PURPLE = \033[0;35m
-CYAN = \033[0;36m
-BLACK = \033[0;30
-WHITE = \033[0;37m
-
-# Colors
-BYELLOW = \033[1;33m
-BGREEN = \033[1;32m
-BBLUE = \033[1;34m
-BRED = \033[1;31m
-BPURPLE = \033[1;35m
-BCYAN = \033[1;36m
-BBLACK = \033[1;30m
-BWHITE = \033[1;37m
-
-# One Line Output
-OL =\e[1A\r\033[K
-CLEAR = \033[2K
-
-#______________________________________________________________________________#
-############################### Path Sources ###################################
-#‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
-
-SRCS_DIR = ./srcs
-#Launcher directory
-PATH_SRCS_LAUNCH = $(SRCS_DIR)/00_launcher
-#Init/exit directory
-PATH_SRCS_INIT = $(SRCS_DIR)/00_launcher/01_init
-#File error directory
-PATH_SRCS_EXIT = $(SRCS_DIR)/00_launcher/02_exit
-#Render directory
-PATH_SRCS_RENDER = $(SRCS_DIR)/10_render
-#Raycasting directory
-PATH_SRCS_RAYC = $(SRCS_DIR)/10_render/raycasting
-#Add ons directory
-PATH_SRCS_ADDONS = $(SRCS_DIR)/10_render/add_ons
-#Gameplay directory
-PATH_SRCS_GAMEPLAY = $(SRCS_DIR)/20_gameplay
-#User input directory
-PATH_SRCS_INPUT = $(SRCS_DIR)/20_gameplay/21_user_input
-#Move management directory
-PATH_SRCS_MOVE = $(SRCS_DIR)/20_gameplay/22_move
-#Utils directory
-PATH_SRCS_UTILS = $(SRCS_DIR)/99_utils
-#______________________________________________________________________________#
-############################### Sources ########################################
-#‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
-
-SRCS_1 += Colleen.c
-SRCS_2 += Grace.c
-SRCS_3 += Sully.c
-
-vpath %c 
-
-#______________________________________________________________________________#
-############################### Objects ########################################
-#‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
-
-OBJS_DIR = ./objs
-OBJS = $(patsubst %.c, $(OBJS_DIR)/%.o, $(SRCS))
-CHK_OBJS = $(patsubst %.c, $(OBJS_DIR)/%.o, $(CHK_SRCS))
-
-
-#______________________________________________________________________________#
-############################### Progress Bar ###################################
-#‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
-
-# PROGRESS BAR
-NB_OBJ = ${words ${OBJS}}
-COUNTER = 1
-PROGRESS = 0
-DONE = 100
-SPACE = 0
-FILL = 0
-EMPTY = 0
-
-define PROGRESS_BAR
-	$(eval PROGRESS=$(shell echo $$(($(COUNTER) * 100 / $(NB_OBJ)))))
-	$(eval DONE=$(shell echo $$(($(PROGRESS) * 30 / 100))))
-	$(eval SPACE=$(shell echo $$((30 - $(DONE)))))
-	$(eval FILL=$(shell printf "%*s" ${DONE} | sed 's/ /◼/g'))
-	$(eval EMPTY=$(shell printf "%*s" ${SPACE} | sed 's/ /◼/g'))
-	printf "\r${CLEAR}$(BCYAN)Compile : $(GREEN)${FILL}$(RED)${EMPTY} $(BWHITE)%3d%%$(END) $(CYAN)%s.c " ${PROGRESS} $1
-	$(eval COUNTER=$(shell echo $$(($(COUNTER) + 1))))
-endef
-
-#______________________________________________________________________________#
-############################### Rules ##########################################
-#‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾#
-
-#_____Build_____#
-all: $(NAME_1) $(NAME_2) $(NAME_3)
-	@echo "--▶ $(BGREEN)all\t$(GREEN)done$(NC)"
-	@echo "--------------------------------------------------"
-
-$(NAME_1): $(OBJS)
-	@$(CC) $(CFLAGS) $(SRCS_1) -o $(NAME_1)
-    #-----Output-----#
-	@echo "$(WHITE)\n▶$(BGREEN)$(NAME_1)\t$(GREEN)Executable created$(NC)"
-
-$(NAME_2): $(OBJS)
-	@$(CC) $(CFLAGS) $(SRCS_2) -o $(NAME_2)
-	@echo "$(WHITE)\n▶$(BGREEN)$(NAME_2)\t$(GREEN)Executable created$(NC)"
-
-$(NAME_3): $(OBJS)
-	@$(CC) $(CFLAGS) $(SRCS_3) -o $(NAME_3)
-	@echo "$(WHITE)\n▶$(BGREEN)$(NAME_3)\t$(GREEN)Executable created$(NC)"
+all: Colleen Grace Sully
 
 essai : all
-	@echo "▶ $(BWHITE)Test $(WHITE)$(PROJECT_NAME_1)$(NC)"
-	@./test.sh $(NAME_1)
-	@echo "▶ $(BWHITE)Test $(WHITE)$(PROJECT_NAME_2)$(NC)"
-	@./test.sh $(NAME_2)
-	@echo "▶ $(BWHITE)Test $(WHITE)$(PROJECT_NAME_3)$(NC)"
-	@./test.sh $(NAME_3)
+	@./test.sh Colleen
+	@./test.sh Grace
+	@./test.sh Sully
 
-$(OBJS): $(OBJS_DIR)/%.o: %.c | dir where
-	@$(CC) $(CFLAGS) -c $< -o $@
-    #-----Output-----#
-	@$(call PROGRESS_BAR, $(basename $(notdir $<)))
+Colleen: $(OBJ_C)
+	@gcc $(CFLAGS) $(OBJ_C) -o Colleen
 
-# Directories
-dir: $(OBJS_DIR)
+Grace: $(OBJ_G)
+	@gcc $(CFLAGS) $(OBJ_G) -o Grace
 
-$(OBJS_DIR):
-	@mkdir $@
+Sully: $(OBJ_S)
+	@gcc $(CFLAGS) $(OBJ_S) -o Sully
 
-#_____Clean_____#
-clean: where_c
-	@rm -rf $(OBJS_DIR)
-	@rm -f tmp_*
-    #-----Output-----#
-	@echo "▶ $(BYELLOW)clean $(YELLOW)Object files removed from $(PROJECT_NAME)$(NC)"
-	@echo "--▶ $(BYELLOW)clean$(YELLOW) done$(NC)"
+clean:
+	@rm -rf $(OBJ_S) $(OBJ_G) $(OBJ_C)
 
 fclean: clean
-	@rm -f $(NAME_1)
-	@rm -f $(NAME_2)
-	@rm -f $(NAME_3)
-    #-----Output-----#
-	@echo "\t$(RED)$(NAME_1) removed$(NC)"
-	@echo "--▶ $(BRED)fclean$(RED) done$(NC)"
-
-# Current Make
-where_c:
-	@echo "$(BBLACK)>$(PROJECT_NAME_1)$(NC)"
-
-where:
-	@echo "$(BBLACK)>$(PROJECT_NAME_1)$(NC)"
+	@rm -f tmp_*
+	@rm -rf Sully Colleen Grace Sully_* Grace_kid.c
 
 re: fclean all
 
