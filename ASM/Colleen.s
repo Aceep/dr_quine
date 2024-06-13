@@ -1,30 +1,23 @@
-;it's a comment
+; Outside comment
+
 global main
 extern printf
 
 section .data
-    fmt: db "global main%cextern printf%c%csection .data%c    fmt: db %c%s%c", len, 0xa
-    len: equ $ - fmt
+format db "; Outside comment%1$c%1$cglobal main%1$cextern printf%1$c%1$csection .data%1$cformat db %2$c%3$s%2$c, 0%1$c%1$csection .text%1$cmain:%1$center 0, 0%1$clea rdi, [rel format]%1$c; Inside comment%1$cmov rsi, 10%1$cmov rdx, 34%1$clea rcx, [rel format]%1$ccall printf%1$cleave%1$ccall return%1$c%1$creturn:%1$cret%1$c", 0
 
 section .text
 
-colleen:
-
-    mov rdi, fmt
-    mov rsi, 10
-    mov rdx, 34
-    mov rax, fmt
-    mov al, 0
-
-
-    call printf
-
-    pop rbp
-    ret
-
 main:
-    call colleen
+enter 0, 0
+lea rdi, [rel format]
+; Inside comment
+mov rsi, 10
+mov rdx, 34
+lea rcx, [rel format]
+call printf
+leave
+call return
 
-    mov al, 1
-    mov ebx, 0
-    int 0x80
+return:
+ret
