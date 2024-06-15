@@ -17,23 +17,23 @@ all: Colleen
 essai : all
 	@./test.sh Colleen
 	@./test.sh Grace
-	@./test.sh Sully
+
 
 Colleen: $(OBJ_C)
-	$(CC2) $(OBJ_C) -o Colleen
+	@$(CC2) -no-pie $(OBJ_C) -o Colleen
 
 Grace: $(OBJ_G)
-	$(CC2) $(OBJ_G) -o Grace
+	@$(CC2) -no-pie $(OBJ_G) -o Grace
 
 Sully: $(OBJ_S)
-	$(CC2) $(OBJ_S) -o Sully
+	@$(CC2) -no-pie $(OBJ_S) -o Sully
 
 clean:
 	@rm -rf $(OBJ_S) $(OBJ_G) $(OBJ_C)
 
 fclean: clean
 	@rm -f tmp_*
-	@rm -rf Sully Colleen Grace Sully_* Grace_kid.c
+	@rm -rf Sully Colleen Grace Sully_* Grace_kid.s
 
 re: fclean all
 
