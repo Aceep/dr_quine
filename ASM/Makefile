@@ -23,10 +23,10 @@ Colleen: $(OBJ_C)
 	$(CC2) $(OBJ_C) -o Colleen
 
 Grace: $(OBJ_G)
-	@clang $(CFLAGS) $(OBJ_G) -o Grace
+	$(CC2) $(OBJ_G) -o Grace
 
 Sully: $(OBJ_S)
-	@clang $(CFLAGS) $(OBJ_S) -o Sully
+	$(CC2) $(OBJ_S) -o Sully
 
 clean:
 	@rm -rf $(OBJ_S) $(OBJ_G) $(OBJ_C)
