@@ -12,12 +12,12 @@ CC2= clang
 %.o: %.s
 	$(CC) $< -o $@
 	
-all: Colleen
+all: Colleen Grace Sully
 
 essai : all
 	@./test.sh Colleen
 	@./test.sh Grace
-
+	@./test.sh Sully
 
 Colleen: $(OBJ_C)
 	@$(CC2) -no-pie $(OBJ_C) -o Colleen
