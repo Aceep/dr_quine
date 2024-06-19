@@ -25,6 +25,8 @@ if [ "$1" = "Sully" ]; then
         rm tmp_3
     fi
     ./Sully
+    mkdir -p objs
+	mv *.o ./objs
     LS=$(ls -l | grep Sully | wc -l)
     COUNT=4
     diff Sully.s Sully_4.s >> tmp_3
