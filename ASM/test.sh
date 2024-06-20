@@ -25,8 +25,6 @@ if [ "$1" = "Sully" ]; then
         rm tmp_3
     fi
     ./Sully
-    mkdir -p objs
-	mv *.o ./objs
     LS=$(ls -l | grep Sully | wc -l)
     COUNT=4
     diff Sully.s Sully_4.s >> tmp_3
@@ -36,7 +34,7 @@ if [ "$1" = "Sully" ]; then
     done
     nombre_lignes=$(wc -l < tmp_3)
     echo -ne "diff the output(Sully_X.s) and the original file(Sully.s).\nThe number of lines should be 20 and the number of files should be 13 : "
-    if [ $nombre_lignes -eq 20 ] && [ $LS -eq 13 ]
+    if [ $nombre_lignes -eq 20 ] && [ $LS -eq 18 ]
     then
         echo "OK"
     else
